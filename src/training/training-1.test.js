@@ -115,12 +115,5 @@ const t = {
 };
 
 import solve from "./training-1";
-import { describe, test, expect } from "vitest";
-
-describe("training-1", () => {
-  [...t.test, ...t.train].forEach((t, i) => {
-    test("Test " + i, () => {
-      expect(solve(t.input)).toEqual(t.output);
-    });
-  });
-});
+import describeTests from "../describeTests";
+describeTests(t, solve);

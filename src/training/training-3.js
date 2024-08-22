@@ -1,5 +1,6 @@
 import buildMatrix from "../buildMatrix";
 import forEachMatrix from "../forEachMatrix";
+import copySubMatrix from "../copySubMatrix";
 
 function areSubMatrixEqual({ input, x1, y1, x2, y2, width, height }) {
   for (let i = 0; i < width; ++i) {
@@ -10,14 +11,6 @@ function areSubMatrixEqual({ input, x1, y1, x2, y2, width, height }) {
     }
   }
   return true;
-}
-
-function copySubMatrix({ input, x1, y1, output, x2, y2, width, height }) {
-  for (let i = 0; i < width; ++i) {
-    for (let j = 0; j < height; ++j) {
-      output[y2 + j][x2 + i] = input[y1 + j][x1 + i];
-    }
-  }
 }
 
 export default function (input) {

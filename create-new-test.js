@@ -9,7 +9,6 @@ fs.readdirSync("./src/training/").forEach((filename) => {
   }
 });
 
-console.log(maxNumber);
 const nextNumber = maxNumber + 1;
 const nextHash = numberToHash()[nextNumber];
 const url = `https://raw.githubusercontent.com/fchollet/ARC-AGI/master/data/training/${nextHash}.json`;

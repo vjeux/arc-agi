@@ -1,5 +1,6 @@
 import copyMatrix from "../copyMatrix";
 import copySubMatrix from "../copySubMatrix";
+import forEachSideAndDiagonal from "../forEachSideAndDiagonal";
 
 // This returns the first color it finds
 function getSubMatrixColor({ input, x, y, width, height }) {
@@ -20,22 +21,6 @@ function getSubMatrixColor({ input, x, y, width, height }) {
     }
   }
   return 0;
-}
-
-function forEachSideAndDiagonal(cb) {
-  // top
-  cb(-1, -1);
-  cb(0, -1);
-  cb(1, -1);
-
-  // middle
-  cb(-1, 0);
-  cb(1, 0);
-
-  // bottom
-  cb(-1, 1);
-  cb(0, 1);
-  cb(1, 1);
 }
 
 export default function (input) {

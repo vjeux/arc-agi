@@ -2,7 +2,6 @@ import copyMatrix from "../copyMatrix";
 import copySubMatrix from "../copySubMatrix";
 import extractShapes from "../extractShapes";
 import getBoundingBox from "../getBoundingBox";
-import matrixToString from "../matrixToString";
 
 export default function (input) {
   const result = copyMatrix(input);

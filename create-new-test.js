@@ -37,12 +37,16 @@ describeTests(t, solve);
       filename,
       `import buildMatrix from "../buildMatrix";
 import copyMatrix from "../copyMatrix";
+import matrixToString from "../matrixToString";
 
 export default function (input) {
-  const result = buildMatrix(${width}, ${height});
-  const result = copyMatrix(input);
+  const output = buildMatrix(${width}, ${height});
+  const output = copyMatrix(input);
 
-  return result;
+  console.log(matrixToString(input));
+  console.log("------");
+  console.log(matrixToString(output));
+  return output;
 }`
     );
     console.log(`Created 

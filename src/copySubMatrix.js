@@ -9,6 +9,17 @@ export default function copySubMatrix({
   height,
   color,
 }) {
+  // console.log({
+  //   input,
+  //   x1,
+  //   y1,
+  //   output,
+  //   x2,
+  //   y2,
+  //   width,
+  //   height,
+  //   color,
+  // });
   for (let i = 0; i < width; ++i) {
     for (let j = 0; j < height; ++j) {
       if (

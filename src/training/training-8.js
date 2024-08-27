@@ -4,7 +4,6 @@ import getWidth from "../getWidth";
 import getHeight from "../getHeight";
 import copySubMatrix from "../copySubMatrix";
 import extractShapes from "../extractShapes";
-import matrixToString from "../matrixToString";
 
 function checkOverlap(A, B) {
   return A.start <= B.end && B.start <= A.end;

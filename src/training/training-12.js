@@ -1,21 +1,9 @@
 import copyMatrix from "../copyMatrix";
 import extractShapes from "../extractShapes";
-import matrixToString from "../matrixToString";
-
-function drawLine({ output, x1, y1, x2, y2, color }) {
-  const totalX = x2 - x1;
-  const totalY = y2 - y1;
-  const total = Math.max(totalX, totalY) + 1;
-
-  const stepX = Math.sign(totalX);
-  const stepY = Math.sign(totalY);
-  for (let i = 0; i < total; i++) {
-    output[y1 + stepY * i][x1 + stepX * i] = color;
-  }
-}
+import drawLine from "../drawLine";
 
 export default function (input) {
-  const result = copyMatrix(input);
+  const output = copyMatrix(input);
 
   const shapes = extractShapes(input);
   shapes.forEach((shape) => {
@@ -26,7 +14,7 @@ export default function (input) {
     const outsideColor = input[shape[0].y - 1][shape[0].x];
 
     drawLine({
-      output: result,
+      output,
       x1: shape[0].x - 2,
       y1: shape[0].y,
       x2: shape[0].x + 2,
@@ -34,7 +22,7 @@ export default function (input) {
       color: outsideColor,
     });
     drawLine({
-      output: result,
+      output,
       x1: shape[0].x,
       y1: shape[0].y - 2,
       x2: shape[0].x,
@@ -42,7 +30,7 @@ export default function (input) {
       color: outsideColor,
     });
     drawLine({
-      output: result,
+      output,
       x1: shape[0].x - 2,
       y1: shape[0].y - 2,
       x2: shape[0].x + 2,
@@ -50,7 +38,7 @@ export default function (input) {
       color: insideColor,
     });
     drawLine({
-      output: result,
+      output,
       x1: shape[0].x - 2,
       y1: shape[0].y + 2,
       x2: shape[0].x + 2,
@@ -59,8 +47,5 @@ export default function (input) {
     });
   });
 
-  console.log(matrixToString(input));
-  console.log("------");
-  console.log(matrixToString(result));
-  return result;
+  return output;
 }

@@ -1,8 +1,9 @@
 import forEachSideAndDiagonal from "./forEachSideAndDiagonal";
 import getWidth from "./getWidth";
 import getHeight from "./getHeight";
+import getBoundingBox from "./getBoundingBox";
 
-export default function extractShapes(input) {
+export default function extractShapes(input, forEach = forEachSideAndDiagonal) {
   const shapes = [];
   const visited = {};
   let currentShape = [];
@@ -32,7 +33,7 @@ export default function extractShapes(input) {
         visited[todo.x + ":" + todo.y] = true;
         currentShape.push(todo);
 
-        forEachSideAndDiagonal((x, y) => {
+        forEach((x, y) => {
           if (
             todo.x + x < 0 ||
             todo.x + x >= width ||
@@ -50,6 +51,14 @@ export default function extractShapes(input) {
       shapes.push(currentShape);
     }
   }
+
+  shapes.forEach((shape) => {
+    const box = getBoundingBox(shape);
+    shape.x = box.x;
+    shape.y = box.y;
+    shape.width = box.width;
+    shape.height = box.height;
+  });
 
   return shapes;
 }

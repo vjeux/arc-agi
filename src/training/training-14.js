@@ -1,20 +1,10 @@
 import buildMatrix from "../buildMatrix";
 import extractShapes from "../extractShapes";
 import copySubMatrix from "../copySubMatrix";
-
-function forEach(cb) {
-  for (let i = -2; i <= 2; ++i) {
-    for (let j = -2; j <= 2; ++j) {
-      if (i === 0 && j === 0) {
-        continue;
-      }
-      cb(i, j);
-    }
-  }
-}
+import forEachSideAndDiagonal2Wide from "../forEachSideAndDiagonal2Wide";
 
 export default function (input) {
-  const shapes = extractShapes(input, forEach);
+  const shapes = extractShapes(input, forEachSideAndDiagonal2Wide);
   const sortedShapes = shapes
     .filter((shape) => shape.color !== 0)
     .sort((a, b) => a.color - b.color);

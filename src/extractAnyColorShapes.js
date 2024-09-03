@@ -3,7 +3,10 @@ import getWidth from "./getWidth";
 import getHeight from "./getHeight";
 import getBoundingBox from "./getBoundingBox";
 
-export default function extractShapes(input, forEach = forEachSideAndDiagonal) {
+export default function extractAnyColorShapes(
+  input,
+  forEach = forEachSideAndDiagonal
+) {
   const shapes = [];
   const visited = {};
   let currentShape = [];
@@ -27,7 +30,10 @@ export default function extractShapes(input, forEach = forEachSideAndDiagonal) {
         }
 
         const color = input[todo.y][todo.x];
-        if (currentShapeColor !== color) {
+        if (currentShapeColor === 0 && color !== 0) {
+          continue;
+        }
+        if (currentShapeColor !== 0 && color === 0) {
           continue;
         }
         visited[todo.x + ":" + todo.y] = true;

@@ -8,6 +8,7 @@ export default function copySubMatrix({
   width,
   height,
   color,
+  overrideBlack,
 }) {
   // console.log({
   //   input,
@@ -37,6 +38,9 @@ export default function copySubMatrix({
       let value = input[y1 + j][x1 + i];
       if (color !== undefined && value !== 0) {
         value = color;
+      }
+      if (value === 0 && overrideBlack === false) {
+        continue;
       }
       output[y2 + j][x2 + i] = value;
     }

@@ -1,6 +1,7 @@
 import copyMatrix from "../copyMatrix";
 import extractShapes from "../extractShapes";
 import isPixelOutsideMatrix from "../isPixelOutsideMatrix";
+import forEach22Square from "../forEach22Square";
 
 function forEachHorizontal3Bar(cb) {
   cb(0, 0);
@@ -16,12 +17,6 @@ function forEachVertical3Bar(cb) {
 }
 forEachVertical3Bar.color = 2;
 
-function forEach22Square(cb) {
-  cb(0, 0);
-  cb(0, 1);
-  cb(1, 0);
-  cb(1, 1);
-}
 forEach22Square.color = 8;
 
 function isForEachGray(input, x, y, forEach) {

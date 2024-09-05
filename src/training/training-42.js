@@ -1,6 +1,6 @@
 import buildMatrix from "../buildMatrix";
 import copyMatrix from "../copyMatrix";
-import drawSquareIgnoreOutside from "../drawSquareIgnoreOutside";
+import drawSquare from "../drawSquare";
 import extractShapes from "../extractShapes";
 
 export default function (input) {
@@ -12,34 +12,38 @@ export default function (input) {
     }
     const size = shape.width / 2;
     if (input[shape.y][shape.x] === 0) {
-      drawSquareIgnoreOutside({
+      drawSquare({
         output,
         x: shape.x - size,
         y: shape.y - size,
         size,
         color: 8,
+        ignoreOutside: true,
       });
-      drawSquareIgnoreOutside({
+      drawSquare({
         output,
         x: shape.x + shape.width,
         y: shape.y + shape.height,
         size,
         color: 8,
+        ignoreOutside: true,
       });
     } else {
-      drawSquareIgnoreOutside({
+      drawSquare({
         output,
         x: shape.x + shape.width,
         y: shape.y - size,
         size,
         color: 8,
+        ignoreOutside: true,
       });
-      drawSquareIgnoreOutside({
+      drawSquare({
         output,
         x: shape.x - size,
         y: shape.y + shape.height,
         size,
         color: 8,
+        ignoreOutside: true,
       });
     }
   });

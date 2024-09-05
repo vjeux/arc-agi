@@ -1,6 +1,6 @@
 import copyMatrix from "../copyMatrix";
 import copySubMatrix from "../copySubMatrix";
-import drawRectangleIgnoreOutside from "../drawRectangleIgnoreOutside";
+import drawRectangle from "../drawRectangle";
 import extractShapes from "../extractShapes";
 
 export default function (input) {
@@ -38,13 +38,14 @@ export default function (input) {
       overrideBlack: false,
     });
 
-    drawRectangleIgnoreOutside({
+    drawRectangle({
       output,
       x: coloredShape.x,
       y: coloredShape.y,
       width: coloredShape.width,
       height: coloredShape.height,
       color: 0,
+      ignoreOutside: true,
     });
   });
 

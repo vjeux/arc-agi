@@ -1,6 +1,6 @@
 import buildMatrix from "../buildMatrix";
 import extractAnyColorShapes from "../extractAnyColorShapes";
-import fillForEachIgnoreOutside from "../fillForEachIgnoreOutside";
+import drawForEach from "../drawForEach";
 import forEach22Square from "../forEach22Square";
 
 export default function (input) {
@@ -16,46 +16,50 @@ export default function (input) {
 
   if (input[shape.y][shape.x] === 2) {
     for (let i = 0; i < 9; ++i) {
-      fillForEachIgnoreOutside(
+      drawForEach({
         output,
-        shape.x - i,
-        shape.y - i,
-        forEach22Square,
-        color
-      );
+        x: shape.x - i,
+        y: shape.y - i,
+        forEach: forEach22Square,
+        color,
+        ignoreOutside: true,
+      });
     }
   }
   if (input[shape.y][shape.x + 1] === 2) {
     for (let i = 0; i < 9; ++i) {
-      fillForEachIgnoreOutside(
+      drawForEach({
         output,
-        shape.x + i,
-        shape.y - i,
-        forEach22Square,
-        color
-      );
+        x: shape.x + i,
+        y: shape.y - i,
+        forEach: forEach22Square,
+        color,
+        ignoreOutside: true,
+      });
     }
   }
   if (input[shape.y + 1][shape.x] === 2) {
     for (let i = 0; i < 9; ++i) {
-      fillForEachIgnoreOutside(
+      drawForEach({
         output,
-        shape.x - i,
-        shape.y + i,
-        forEach22Square,
-        color
-      );
+        x: shape.x - i,
+        y: shape.y + i,
+        forEach: forEach22Square,
+        color,
+        ignoreOutside: true,
+      });
     }
   }
   if (input[shape.y + 1][shape.x + 1] === 2) {
     for (let i = 0; i < 9; ++i) {
-      fillForEachIgnoreOutside(
+      drawForEach({
         output,
-        shape.x + i,
-        shape.y + i,
-        forEach22Square,
-        color
-      );
+        x: shape.x + i,
+        y: shape.y + i,
+        forEach: forEach22Square,
+        color,
+        ignoreOutside: true,
+      });
     }
   }
   return output;

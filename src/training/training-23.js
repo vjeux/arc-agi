@@ -1,6 +1,7 @@
 import copyMatrix from "../copyMatrix";
 import extractShapes from "../extractShapes";
 import isPixelOutsideMatrix from "../isPixelOutsideMatrix";
+import drawForEach from "../drawForEach";
 import forEach22Square from "../forEach22Square";
 
 function forEachHorizontal3Bar(cb) {
@@ -33,12 +34,6 @@ function isForEachGray(input, x, y, forEach) {
   return result;
 }
 
-function fillForEach(output, x, y, forEach, color) {
-  forEach((i, j) => {
-    output[y + j][x + i] = color;
-  });
-}
-
 export default function (input) {
   const shape = extractShapes(input).find((shape) => shape.color === 5);
 
@@ -50,7 +45,14 @@ export default function (input) {
 
     if (isForEachGray(matrix, shape[i].x, shape[i].y, forEach)) {
       matrix = copyMatrix(matrix);
-      fillForEach(matrix, shape[i].x, shape[i].y, forEach, forEach.color);
+      drawForEach({
+        output: matrix,
+        x: shape[i].x,
+        y: shape[i].y,
+        forEach,
+        color: forEach.color,
+        ignoreOutside: true,
+      });
     }
 
     if (matrix[shape[i].y][shape[i].x] === 5) {

@@ -1,13 +1,12 @@
 import buildMatrix from "../buildMatrix";
-import copyMatrix from "../copyMatrix";
 import getWidth from "../getWidth";
 import getHeight from "../getHeight";
 import copySubMatrix from "../copySubMatrix";
 import forEachDiagonal from "../forEachDiagonal";
 import forEachPixel from "../forEachPixel";
 import forEachDiagonal from "../forEachDiagonal";
-import setColorIgnoreOutside from "../setColorIgnoreOutside";
-import getColorIgnoreOutside from "../getColorIgnoreOutside";
+import setColor from "../setColor";
+import getColor from "../getColor";
 
 export default function (input) {
   const width = getWidth(input);
@@ -61,8 +60,8 @@ export default function (input) {
       return;
     }
     forEachDiagonal((x, y) => {
-      if (!getColorIgnoreOutside(output, i + x, j + y)) {
-        setColorIgnoreOutside(output, i + x, j + y, 8);
+      if (!getColor(output, i + x, j + y)) {
+        setColor({ output, x: i + x, y: j + y, color: 8, ignoreOutside: true });
       }
     });
   });

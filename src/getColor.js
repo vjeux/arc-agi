@@ -1,9 +1,9 @@
 import isPixelOutsideMatrix from "./isPixelOutsideMatrix";
 
-export default function setColorIgnoreOutside(output, i, j, color) {
+export default function getColor(output, i, j) {
   if (isPixelOutsideMatrix(output, i, j)) {
-    return;
+    return null;
   }
 
-  output[j][i] = color;
+  return output[j][i];
 }

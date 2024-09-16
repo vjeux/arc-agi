@@ -7,7 +7,9 @@ export default function (input) {
   const shape = shapes.find(
     (s) =>
       s.color !== 0 &&
-      shapes.find((ss) => ss.color === s.color && ss !== s) === undefined
+      shapes.find(
+        (ss) => ss.length < s.length && ss !== s && ss.color !== 0
+      ) === undefined
   );
   const output = buildMatrix(shape.width, shape.height);
   copySubMatrix({

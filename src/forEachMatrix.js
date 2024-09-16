@@ -1,7 +1,7 @@
 export default function forEachMatrix(input, cb) {
-  input.forEach((row, i) => {
-    row.forEach((col, j) => {
-      cb(row[j], i, j);
+  input.forEach((row, y) => {
+    row.forEach((color, x) => {
+      cb(color, x, y);
     });
   });
 }

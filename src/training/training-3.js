@@ -61,9 +61,9 @@ export default function (input) {
     });
   }
 
-  forEachMatrix(result, (value, i, j) => {
+  forEachMatrix(result, (value, x, y) => {
     if (value === 1) {
-      result[i][j] = 2;
+      result[y][x] = 2;
     }
   });
 

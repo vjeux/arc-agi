@@ -6,9 +6,9 @@ import getHeight from "../getHeight";
 export default function (input) {
   const result = copyMatrix(input);
 
-  forEachMatrix(result, (value, i, j) => {
+  forEachMatrix(result, (value, x, y) => {
     if (value === 0) {
-      result[i][j] = 4;
+      result[y][x] = 4;
     }
   });
 

@@ -1,4 +1,4 @@
-export default function copySubMatrix({
+export default function testSubMatrix({
   input,
   x0,
   y0,
@@ -9,9 +9,7 @@ export default function copySubMatrix({
   y2,
   width,
   height,
-  color,
-  overrideBlack,
-  overrideColor,
+  test,
 }) {
   if (x0 !== undefined && x1 !== undefined) {
     x2 -= x0 - x1;
@@ -32,17 +30,12 @@ export default function copySubMatrix({
       ) {
         continue;
       }
-      let value = input[y1 + j][x1 + i];
-      if (output[y2 + j][x2 + i] !== 0 && overrideColor === false) {
-        continue;
+      let inputColor = input[y1 + j][x1 + i];
+      let outputColor = output[y2 + j][x2 + i];
+      if (!test(inputColor, outputColor)) {
+        return false;
       }
-      if (color !== undefined && value !== 0) {
-        value = color;
-      }
-      if (value === 0 && overrideBlack === false) {
-        continue;
-      }
-      output[y2 + j][x2 + i] = value;
     }
   }
+  return true;
 }

@@ -4,6 +4,17 @@ import drawRectangle from "../drawRectangle";
 import getHeight from "../getHeight";
 import getWidth from "../getWidth";
 
+function isRectangleBlack(input, x, y, width, height) {
+  for (let i = 0; i < width; ++i) {
+    for (let j = 0; j < height; ++j) {
+      if (input[y + j][x + i] !== 0) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 export default function (input) {
   const output = copyMatrix(input);
   const width = getWidth(input);
@@ -17,29 +28,23 @@ export default function (input) {
 
   for (let i = 0; i < width; ++i) {
     for (let j = 0; j < height; ++j) {
-      let isGood = true;
-      rectangleLoop: for (let x = i; x < width; ++x) {
+      for (let x = i; x < width; ++x) {
         for (let y = j; y < height; ++y) {
-          if (input[y][x] !== 0) {
-            isGood = false;
-            break rectangleLoop;
+          let rectangleWidth = width - x;
+          let rectangleHeight = height - y;
+          if (isRectangleBlack(input, i, j, rectangleWidth, rectangleHeight)) {
+            if (
+              rectangleWidth > 1 &&
+              rectangleHeight > 1 &&
+              rectangleWidth * rectangleHeight > maxSurface
+            ) {
+              maxSurface = rectangleWidth * rectangleHeight;
+              maxX = i;
+              maxY = j;
+              maxWidth = rectangleWidth;
+              maxHeight = rectangleHeight;
+            }
           }
-        }
-      }
-      if (isGood) {
-        let rectangleWidth = width - i + 1;
-        let rectangleHeight = height - j + 1;
-        if (
-          rectangleWidth > 1 &&
-          rectangleHeight > 1 &&
-          rectangleWidth * rectangleHeight > maxSurface
-        ) {
-          maxSurface = rectangleWidth * rectangleHeight;
-          maxX = i;
-          maxY = j;
-          maxWidth = rectangleWidth;
-          maxHeight = rectangleHeight;
-          console.log(maxX, maxY, maxWidth, maxHeight);
         }
       }
     }

@@ -1,5 +1,4 @@
 import buildMatrix from "../buildMatrix";
-import copyMatrix from "../copyMatrix";
 import scaleMatrix from "../scaleMatrix";
 
 export default function (input) {

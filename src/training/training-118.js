@@ -60,7 +60,7 @@ export default function (input) {
       }
     }
     if (isRun && hasRed) {
-      verticals.push({ y: startY, x: i, width: 1, height: j - startY });
+      verticals.push({ y: startY, x: i, width: 1, height: height - startY });
     }
   }
 
@@ -82,7 +82,10 @@ export default function (input) {
   let maxSize = 0;
   intersections.forEach((intersection) => {
     const top = intersection.horizontal.y - intersection.vertical.y;
-    const left = intersection.vertical.x - intersection.horizontal.x;
+    let left = intersection.vertical.x - intersection.horizontal.x;
+    if (intersection.horizontal.x === 0) {
+      left = 10;
+    }
     const right =
       intersection.horizontal.x +
       intersection.horizontal.width -
@@ -109,14 +112,14 @@ export default function (input) {
     }
   });
 
-  outer: for (let size = maxSize; size >= 1; size--) {
+  outer: for (let size = maxSize; size >= 2; size--) {
     const groupings = getGroupings(
       intersections.filter((intersection) => intersection.size >= size)
     );
 
     for (let grouping of groupings) {
-      let numRed = 0;
       let reds = {};
+      let isValidGrouping = true;
       grouping.forEach((intersection) => {
         for (
           let i = intersection.horizontal.y - size;
@@ -125,9 +128,8 @@ export default function (input) {
         ) {
           if (input[i][intersection.vertical.x] === 2) {
             if (reds[i + ":" + intersection.vertical.x]) {
-              break;
+              isValidGrouping = false;
             }
-            numRed++;
             reds[i + ":" + intersection.vertical.x] = true;
           }
         }
@@ -141,39 +143,34 @@ export default function (input) {
           }
           if (input[intersection.horizontal.y][i] === 2) {
             if (reds[intersection.horizontal.y + ":" + i]) {
-              break;
+              isValidGrouping = false;
             }
-            numRed++;
             reds[intersection.horizontal.y + ":" + i] = true;
           }
         }
       });
 
-      console.log(size, numRed, totalRed);
-
-      if (numRed === totalRed) {
-        intersections
-          .filter((intersection) => intersection.size >= size)
-          .forEach((intersection) => {
-            for (
-              let i = intersection.horizontal.y - size;
-              i <= intersection.horizontal.y + size;
-              ++i
-            ) {
-              if (input[i][intersection.vertical.x] !== 2) {
-                output[i][intersection.vertical.x] = 8;
-              }
+      if (isValidGrouping && Object.keys(reds).length === totalRed) {
+        grouping.forEach((intersection) => {
+          for (
+            let i = intersection.horizontal.y - size;
+            i <= intersection.horizontal.y + size;
+            ++i
+          ) {
+            if (input[i][intersection.vertical.x] !== 2) {
+              output[i][intersection.vertical.x] = 8;
             }
-            for (
-              let i = intersection.vertical.x - size;
-              i <= intersection.vertical.x + size;
-              ++i
-            ) {
-              if (input[intersection.horizontal.y][i] !== 2) {
-                output[intersection.horizontal.y][i] = 8;
-              }
+          }
+          for (
+            let i = intersection.vertical.x - size;
+            i <= intersection.vertical.x + size;
+            ++i
+          ) {
+            if (input[intersection.horizontal.y][i] !== 2) {
+              output[intersection.horizontal.y][i] = 8;
             }
-          });
+          }
+        });
 
         break outer;
       }

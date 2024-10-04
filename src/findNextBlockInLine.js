@@ -1,6 +1,14 @@
 import getColor from "./getColor";
 
-export default function findNextBlockInLine(input, x, y, dx, dy, targetColor) {
+export default function findNextBlockInLine(
+  input,
+  x,
+  y,
+  dx,
+  dy,
+  targetColor,
+  giveOutside
+) {
   if (!dx && !dy) {
     throw new Exception("findNextBlockInLine must have dx and dy !== 0");
   }
@@ -9,7 +17,11 @@ export default function findNextBlockInLine(input, x, y, dx, dy, targetColor) {
     y += dy;
     const color = getColor(input, x, y);
     if (color === null) {
-      return null;
+      if (giveOutside) {
+        return { x, y };
+      } else {
+        return null;
+      }
     }
     if (targetColor !== undefined && color !== targetColor) {
       continue;
